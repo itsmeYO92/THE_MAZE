@@ -9,12 +9,15 @@ void print_level(void);
 
 int main(void)
 {
+	int p_x = 0, p_y = 0;  /* Player initial position */
+	char mv;
 	system("clear");
 
 	init_level();
 
 	print_level();
-
+	
+	
 	return (0);
 }
 
