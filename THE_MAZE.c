@@ -42,6 +42,8 @@ void init_level(void)
 		fgets(line,sizeof(line), maze);
 		strcpy(level[i],line);
 	}
+
+	level[0][0]='@';
 } 
 
 void print_level(void)
