@@ -3,7 +3,7 @@
 #include <string.h>
 
 
-char level[10][100];
+char level[41][100];
 void init_level(void);
 void print_level(void);
 
@@ -25,7 +25,7 @@ void init_level(void)
 	maze=fopen("level1.txt","r");
 	char line[100];
 
-	for (int i = 0;i < 10; i++)
+	for (int i = 0;i < 41; i++)
 	{
 		fgets(line,sizeof(line), maze);
 		strcpy(level[i],line);
@@ -34,6 +34,6 @@ void init_level(void)
 
 void print_level(void)
 {
-	for (int i=0; i < 10; i++)
+	for (int i=0; i < 41; i++)
 		printf("%s",level[i]);
 }
