@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 
-
-char level[10][10];
+char level[10][100];
 void init_level(void);
+void print_level(void);
 
 int main(void)
 {
@@ -12,8 +13,7 @@ int main(void)
 
 	init_level();
 
-	printf("%s",level[3]);
-
+	print_level();
 
 	return (0);
 }
@@ -23,8 +23,17 @@ void init_level(void)
 {
 	FILE *maze;
 	maze=fopen("level1.txt","r");
+	char line[100];
 
 	for (int i = 0;i < 10; i++)
-		fgets(level[i],sizeof(level[i]), maze);
-		
+	{
+		fgets(line,sizeof(line), maze);
+		strcpy(level[i],line);
+	}
 } 
+
+void print_level(void)
+{
+	for (int i=0; i < 10; i++)
+		printf("%s",level[i]);
+}
