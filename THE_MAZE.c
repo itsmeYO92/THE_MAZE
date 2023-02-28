@@ -16,15 +16,15 @@ int main(void)
 
 	char mv;
 	system("clear");
-	system( "/bin/stty --file=/dev/tty -icanon" );
+	system( "/bin/stty --file=/dev/tty -icanon" );  /*no need to hit enter when you move*/
 
-	init_level();
+	init_level();        /* initialising the level array from the level file text */
 
-	print_level();
+	print_level();       /* printing the maze to the console */
 	
 GET_MV:
 	mv=getchar();
-	move_player(mv);
+	move_player(mv);     
 	print_level();
 	goto GET_MV;
 
@@ -72,7 +72,7 @@ void move_player(char mv)
 	}
 	else if ('s' == mv)
 	{
-		if( p_x < 30)
+		if( p_x < 60)
 		{
 			if(level[p_y][p_x+1] == ' ')
 			{
