@@ -29,9 +29,10 @@ GET_MV:
 	if(is_success())
 	{
 		level++;
+		p_y = 0;	
+		p_x = 0;
 		init_level(level);
 		print_level();		
-	
 	}
 	goto GET_MV;
 
@@ -44,6 +45,7 @@ void init_level(int n)
 {
 	FILE *maze;
 	char lev[30];
+
 	sprintf(lev,"level%d.txt",n);
 	maze=fopen(lev,"r");
 	char line[200];
@@ -54,7 +56,9 @@ void init_level(int n)
 		strcpy(level[i],line);
 	}
 
-	level[0][0]='@';
+	level[p_y][p_x]='@';
+	fclose(maze);
+	lev[0] = '\0';
 } 
 
 void print_level(void)
