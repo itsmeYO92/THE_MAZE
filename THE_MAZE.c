@@ -3,12 +3,17 @@
 #include <string.h>
 #include <ncurses.h>
 
-char level[32][200];
+	/*  FUNCTIONS   */
+
 void init_level(int n);
 void print_level(void);
 void move_player(char mv);
 int is_success(void);
 
+	/* GLOBAL VARIABLES */
+
+char level[32][200];
+char avatar = '@';     
 int p_x = 0, p_y = 0;  /* Player initial position */
 
 int main(void)
@@ -18,21 +23,21 @@ int main(void)
 	system("clear");
 	system( "/bin/stty --file=/dev/tty -icanon" );  /*no need to hit enter when you move*/
 	int level=1;
-	init_level(level);        /* initialising the level array from the level file text */
+	init_level(level);         /* initialising the level array from the level text file */
 
-	print_level();       /* printing the maze to the console */
+	print_level();		   /* printing the maze to the console */
 	
 GET_MV:
 	mv=getchar();
-	move_player(mv);     
+	move_player(mv);
 	print_level();
 	if(is_success())
 	{
 		level++;
-		p_y = 0;	
+		p_y = 0;
 		p_x = 0;
 		init_level(level);
-		print_level();		
+		print_level();	
 	}
 	goto GET_MV;
 
@@ -56,7 +61,7 @@ void init_level(int n)
 		strcpy(level[i],line);
 	}
 
-	level[p_y][p_x]='@';
+	level[p_y][p_x]=avatar;
 	fclose(maze);
 	lev[0] = '\0';
 } 
@@ -81,7 +86,7 @@ void move_player(char mv)
 			if(level[p_y][p_x-1] == ' ')
 			{
 				level[p_y][p_x]=' ';
-				level[p_y][p_x-1]='@';
+				level[p_y][p_x-1]=avatar;
 				p_x--;
 			}
 		}
@@ -93,7 +98,7 @@ void move_player(char mv)
 			if(level[p_y][p_x+1] == ' ')
 			{
 				level[p_y][p_x]=' ';
-				level[p_y][p_x+1]='@';
+				level[p_y][p_x+1]=avatar;
 				p_x++;
 			}
 		}
@@ -107,7 +112,7 @@ void move_player(char mv)
 			if(level[p_y-1][p_x] == ' ')
 			{
 				level[p_y][p_x]=' ';
-				level[p_y-1][p_x]='@';
+				level[p_y-1][p_x]=avatar;
 				p_y--;
 			}
 		}
@@ -119,7 +124,7 @@ void move_player(char mv)
 			if(level[p_y+1][p_x] == ' ')
 			{
 				level[p_y][p_x]=' ';
-				level[p_y+1][p_x]='@';
+				level[p_y+1][p_x]=avatar;
 				p_y++;
 			}
 		}
