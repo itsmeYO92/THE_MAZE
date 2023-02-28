@@ -2,26 +2,28 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ncurses.h>
-
+#define KRED "\x1B[31m"
+#define KNOR "\x1B[37m"
 	/*  FUNCTIONS   */
 
 void init_level(int n);
 void print_level(void);
 void move_player(char mv);
 int is_success(void);
+char welcome_screen(void);
 
 	/* GLOBAL VARIABLES */
 
 char level[32][200];
-char avatar = '@';     
+char avatar ;     
 int p_x = 0, p_y = 0;  /* Player initial position */
 
 int main(void)
 {
-
+	system( "/bin/stty --file=/dev/tty -icanon" );  /*no need to hit enter when you move*/
+	avatar = welcome_screen();
 	char mv;
 	system("clear");
-	system( "/bin/stty --file=/dev/tty -icanon" );  /*no need to hit enter when you move*/
 	int level=1;
 	init_level(level);         /* initialising the level array from the level text file */
 
@@ -139,4 +141,41 @@ int is_success(void)
 	return (0);
 } 
 
+char welcome_screen(void)
+{
+	
+	int j = 0;
+	char avatars[]="&!@/O";
+	char ch;
+PRINT:	
+	system("clear");
+	printf("\n\n\n		###    PLEASE MAXIMIZE THE WINDOWS    ###\n");
+	printf("\n\n\n		   use q to move left, s to move right\n");
+	printf("\n\n     		"); 
+	for (int i = 0; i < 5 ; i++)
+	{
+		if(i == j)
+		{
+			printf("%s",KRED);
+			printf("%c    ",avatars[i]);
+			printf("%s",KNOR);
+		}
+		else
+		{
+		printf("%c    ", avatars[i]);
+		}
+	}
+	
+	ch = getchar();
 
+	if (ch == 'q' && j > 0)
+		j--;
+	else if (ch == 's' && j < 4)
+		j++;
+	else if (ch == '\n')
+		return(avatars[j]);
+
+	goto PRINT;
+
+	
+}
