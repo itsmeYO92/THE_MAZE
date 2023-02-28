@@ -72,10 +72,26 @@ void print_level(void)
 {
 	system("clear");
 	for (int i=0; i < 32; i++)
-		printf("%s",level[i]);
+	{
+		if (i != p_y)
+			printf("%s",level[i]);
+		else
+		{
+			for (int j = 0; j < strlen(level[i]); j++)
+			{
+				if (j != p_x)
+					printf("%c",level[i][j]);
+				else
+				{
+					printf("%s",KRED);
+					printf("%c", level[i][j]);
+					printf("%s", KNOR);
+				}
+			}
+		}
 
+	}
 
-//	printf("\n px = %d  py = %d", p_x, p_y);
 }
 
 
@@ -151,7 +167,7 @@ PRINT:
 	system("clear");
 	printf("\n\n\n		###    PLEASE MAXIMIZE THE WINDOWS    ###\n");
 	printf("\n\n\n		   use q to move left, s to move right\n");
-	printf("\n\n     		"); 
+	printf("\n\n                     "); 
 	for (int i = 0; i < 5 ; i++)
 	{
 		if(i == j)
