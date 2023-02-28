@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include <ncurses.h>
 
 char level[32][200];
 void init_level(void);
@@ -13,8 +13,10 @@ int p_x = 0, p_y = 0;  /* Player initial position */
 
 int main(void)
 {
+
 	char mv;
 	system("clear");
+	system( "/bin/stty --file=/dev/tty -icanon" );
 
 	init_level();
 
@@ -107,3 +109,4 @@ void move_player(char mv)
 		}
 	}
 }
+
