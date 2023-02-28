@@ -4,7 +4,7 @@
 #include <ncurses.h>
 
 char level[32][200];
-void init_level(void);
+void init_level(int n);
 void print_level(void);
 void move_player(char mv);
 int is_success(void);
@@ -17,8 +17,8 @@ int main(void)
 	char mv;
 	system("clear");
 	system( "/bin/stty --file=/dev/tty -icanon" );  /*no need to hit enter when you move*/
-
-	init_level();        /* initialising the level array from the level file text */
+	int level=1;
+	init_level(level);        /* initialising the level array from the level file text */
 
 	print_level();       /* printing the maze to the console */
 	
@@ -28,8 +28,10 @@ GET_MV:
 	print_level();
 	if(is_success())
 	{
-		system("clear");
-		printf("you've made it");
+		level++;
+		init_level(level);
+		print_level();		
+	
 	}
 	goto GET_MV;
 
@@ -38,10 +40,12 @@ GET_MV:
 }
 
 
-void init_level(void)
+void init_level(int n)
 {
 	FILE *maze;
-	maze=fopen("level1.txt","r");
+	char lev[30];
+	sprintf(lev,"level%d.txt",n);
+	maze=fopen(lev,"r");
 	char line[200];
 
 	for (int i = 0;i < 32; i++)
@@ -125,3 +129,5 @@ int is_success(void)
 		return (1);
 	return (0);
 } 
+
+
