@@ -7,7 +7,7 @@ char level[32][200];
 void init_level(void);
 void print_level(void);
 void move_player(char mv);
-
+int is_success(void);
 
 int p_x = 0, p_y = 0;  /* Player initial position */
 
@@ -26,6 +26,11 @@ GET_MV:
 	mv=getchar();
 	move_player(mv);     
 	print_level();
+	if(is_success())
+	{
+		system("clear");
+		printf("you've made it");
+	}
 	goto GET_MV;
 
 	
@@ -53,6 +58,9 @@ void print_level(void)
 	system("clear");
 	for (int i=0; i < 32; i++)
 		printf("%s",level[i]);
+
+
+//	printf("\n px = %d  py = %d", p_x, p_y);
 }
 
 
@@ -110,3 +118,10 @@ void move_player(char mv)
 	}
 }
 
+
+int is_success(void)
+{
+	if (p_x == 59 && p_y == 30)
+		return (1);
+	return (0);
+} 
