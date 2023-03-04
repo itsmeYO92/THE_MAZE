@@ -53,7 +53,7 @@ void init_level(int n)
 	FILE *maze;
 	char lev[30];
 
-	sprintf(lev,"level%d.txt",n);
+	sprintf(lev,"levels/level%d.txt",n);
 	maze=fopen(lev,"r");
 	char line[200];
 
